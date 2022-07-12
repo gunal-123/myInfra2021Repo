@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "gunalbucket"
+    bucket = "bucketgunal"
     key = "main"
     region = "ap-south-1"
-    dynamodb_table = "gunaltable"
+    dynamodb_table = "tablegunal"
   }
 }
