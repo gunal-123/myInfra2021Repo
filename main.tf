@@ -20,8 +20,14 @@ resource "aws_security_group" "my_security_group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
- # outbound from jenkis server
+ingress  {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+   
+# outbound from jenkis server
   egress {
     from_port   = 0
     to_port     = 65535
@@ -39,6 +45,7 @@ resource "aws_instance" "myFirstInstance" {
   key_name = var.key_name
   instance_type = var.instance_type
   security_groups= [var.security_group]
+  user_data = "${file("install_jenkins.sh")}"
   tags= {
     Name = var.tag_name
   }
